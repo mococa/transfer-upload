@@ -7,7 +7,7 @@ const { v4 } = require("uuid");
 const app = express();
 
 app.use(cors("*"));
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 
 app.get("/", (req, res) => {
   res.send("ping received at " + new Date().toLocaleString());
@@ -25,7 +25,7 @@ app.post("/", async (req, res) => {
   const upload = exec(command);
 
   upload.stdout.on("data", (url) => {
-      res.send(url);
+    res.send(url);
   });
 });
 
